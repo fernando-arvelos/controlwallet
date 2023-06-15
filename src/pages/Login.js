@@ -1,5 +1,5 @@
 import React from 'react';
-import { shape, func, string } from 'prop-types';
+import { shape, func } from 'prop-types';
 import { connect } from 'react-redux';
 import { userEmail } from '../redux/actions/userAction';
 
@@ -40,8 +40,6 @@ class Login extends React.Component {
     const { email, password } = this.state;
     const isEmailValid = this.isEmailValid();
     const isPasswordValid = this.isPasswordValid();
-    const { emailGlobal } = this.props;
-    console.log(emailGlobal);
 
     return (
       <div>
@@ -75,16 +73,11 @@ class Login extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  emailGlobal: state.user.email,
-});
-
-export default connect(mapStateToProps)(Login);
+export default connect()(Login);
 
 Login.propTypes = {
   history: shape({
     push: func,
   }).isRequired,
   dispatch: func.isRequired,
-  emailGlobal: string.isRequired,
 };
