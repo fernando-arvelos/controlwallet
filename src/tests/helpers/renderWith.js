@@ -2,7 +2,7 @@ import React from 'react';
 import { createMemoryHistory } from 'history';
 import { Provider } from 'react-redux';
 import { Router } from 'react-router-dom';
-import { applyMiddleware, createStore } from 'redux';
+import { applyMiddleware, legacy_createStore as createStore } from 'redux';
 import { render } from '@testing-library/react';
 import thunk from 'redux-thunk';
 import rootReducer from '../../redux/reducers';
@@ -48,14 +48,21 @@ export function renderWithRedux(component, options = {}) {
   };
 }
 
-export function renderWithRouterAndRedux(component, options = {}) {
-  const {
-    initialEntries = ['/'],
-    history = createMemoryHistory({ initialEntries }),
-  } = options;
+export const renderWithRouterAndRedux = (component, route = '/', initialState) => {
+  const store = createStore(rootReducer, initialState, applyMiddleware(thunk));
+  const history = createMemoryHistory({ initialEntries: [route] });
 
   return {
-    ...renderWithRedux(withRouter(component, history), options),
+    ...render(
+      <Provider store={ store }>
+        <Router history={ history }>
+          {component}
+        </Router>
+      </Provider>,
+    ),
     history,
+    store,
   };
-}
+};
+
+export default renderWithRouterAndRedux;

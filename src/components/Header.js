@@ -1,17 +1,19 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { string, arrayOf, shape, number } from 'prop-types';
+import { string, arrayOf, shape } from 'prop-types';
 
 class Header extends Component {
   render() {
     const { user, wallet } = this.props;
     const { email } = user;
     const { expenses } = wallet;
+
     const values = expenses.map((expense) => {
       const { value, currency, exchangeRates } = expense;
       const { ask } = exchangeRates[currency];
       return (value * ask);
     });
+
     const reducerValue = values.reduce((acc, curr) => acc + curr, 0);
     const totalValue = reducerValue.toFixed(2);
 
@@ -45,7 +47,7 @@ Header.propTypes = {
   }).isRequired,
   wallet: shape({
     expenses: arrayOf(shape({
-      value: number,
+      value: string,
       currency: string,
       exchangeRates: shape({
         ask: string,
