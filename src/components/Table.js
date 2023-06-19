@@ -35,11 +35,10 @@ class Table extends Component {
             const { value, currency, exchangeRates } = expense;
             const exchange = Number(exchangeRates[currency].ask);
             const convValue = (value * exchange);
-            // eslint-disable-next-line no-magic-numbers
-            const randomNumber = (Math.floor(Math.random() * 10000) + 1);
+            const number = 10000;
 
             return (
-              <tr key={ randomNumber }>
+              <tr key={ (Math.floor(Math.random() * number) + 1) }>
                 <td>{expense.description}</td>
                 <td>{expense.tag}</td>
                 <td>{expense.method}</td>
