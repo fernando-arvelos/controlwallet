@@ -1,18 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { func, arrayOf, string } from 'prop-types';
+import { func, arrayOf, string, number, bool, shape } from 'prop-types';
 import { actionFetchCurrencies } from '../redux/actions/walletAction';
-import { addExpenses } from '../redux/actions/ expensesAction';
+import { addExpenses, saveEditExpense } from '../redux/actions/ expensesAction';
 import getCurrencies from '../services/currenciesAPI';
 
 class WalletForm extends Component {
   state = {
-    id: 0,
-    value: '',
-    description: '',
-    currency: 'USD',
-    method: 'Dinheiro',
-    tag: 'Alimentação',
+    addExpensesState: {
+      id: 0,
+      value: '',
+      description: '',
+      currency: 'USD',
+      method: 'Dinheiro',
+      tag: 'Alimentação',
+    },
   };
 
   async componentDidMount() {
@@ -22,37 +24,63 @@ class WalletForm extends Component {
 
   handleChange = ({ target }) => {
     const { name, value } = target;
-    this.setState({
-      [name]: value,
-    });
+
+    this.setState((prevState) => ({
+      addExpensesState: {
+        ...prevState.addExpensesState,
+        [name]: value,
+      },
+    }));
   };
 
-  handleClick = async (e) => {
+  handleClick = async () => {
     const { dispatch } = this.props;
-    const { id } = this.state;
+    const { addExpensesState } = this.state;
+    const { id } = addExpensesState;
 
     const response = await getCurrencies();
-    e.preventDefault();
     const stateSaved = {
-      id,
-      ...this.state,
+      ...addExpensesState,
       exchangeRates: response,
     };
     dispatch(addExpenses(stateSaved));
 
     this.setState({
-      id: id + 1,
-      value: '',
-      description: '',
-      currency: 'USD',
-      method: 'Dinheiro',
-      tag: 'Alimentação',
+      addExpensesState: {
+        id: id + 1,
+        value: '',
+        description: '',
+        currency: 'USD',
+        method: 'Dinheiro',
+        tag: 'Alimentação',
+      },
     });
   };
 
+  handleEdit = () => {
+    const { expenses, idToEdit, dispatch } = this.props;
+    const { addExpensesState } = this.state;
+    const { value, description, currency, method, tag } = addExpensesState;
+    const editCurrentExpense = expenses.find((expense) => expense.id === idToEdit);
+    const editedCurrent = {
+      id: idToEdit,
+      value,
+      description,
+      currency,
+      tag,
+      method,
+      exchangeRates: editCurrentExpense.exchangeRates,
+    };
+    const deleteExpense = expenses.filter((expense) => expense.id !== idToEdit);
+    dispatch(saveEditExpense(deleteExpense));
+    const newExpenses = [...deleteExpense, editedCurrent];
+    dispatch(saveEditExpense(newExpenses.sort((a, b) => a.id - b.id)));
+  };
+
   render() {
-    const { currencies } = this.props;
-    const { value, description, currency, method, tag } = this.state;
+    const { currencies, editor } = this.props;
+    const { addExpensesState } = this.state;
+    const { value, description, currency, method, tag } = addExpensesState;
 
     return (
       <>
@@ -121,10 +149,10 @@ class WalletForm extends Component {
           </select>
 
           <button
-            type="submit"
-            onClick={ this.handleClick }
+            type="button"
+            onClick={ editor ? this.handleEdit : this.handleClick }
           >
-            Adicionar despesa
+            { editor ? 'Editar despesa' : 'Adicionar despesa' }
           </button>
         </div>
 
@@ -136,6 +164,8 @@ class WalletForm extends Component {
 const mapStateToProps = ({ wallet }) => ({
   currencies: wallet.currencies,
   expenses: wallet.expenses,
+  editor: wallet.editor,
+  idToEdit: wallet.idToEdit,
 });
 
 export default connect(mapStateToProps)(WalletForm);
@@ -143,4 +173,16 @@ export default connect(mapStateToProps)(WalletForm);
 WalletForm.propTypes = {
   dispatch: func.isRequired,
   currencies: arrayOf(string).isRequired,
+  idToEdit: number.isRequired,
+  editor: bool.isRequired,
+  expenses: arrayOf(
+    shape({
+      id: number.isRequired,
+      value: string.isRequired,
+      description: string.isRequired,
+      currency: string.isRequired,
+      method: string.isRequired,
+      tag: string.isRequired,
+    }).isRequired,
+  ).isRequired,
 };

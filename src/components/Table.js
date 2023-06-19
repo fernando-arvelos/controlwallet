@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { string, arrayOf, shape, func } from 'prop-types';
-import { delExpenses } from '../redux/actions/ expensesAction';
+import { delExpenses, editExpenses } from '../redux/actions/ expensesAction';
 
 class Table extends Component {
   handleClickDel = (expense) => {
@@ -10,6 +10,11 @@ class Table extends Component {
     const idToDelete = expense.id;
     const newExpenses = expenses.filter((item) => item.id !== idToDelete);
     dispatch(delExpenses(newExpenses));
+  };
+
+  handleClickEdit = (id) => {
+    const { dispatch } = this.props;
+    dispatch(editExpenses(id));
   };
 
   render() {
@@ -35,10 +40,9 @@ class Table extends Component {
             const { value, currency, exchangeRates } = expense;
             const exchange = Number(exchangeRates[currency].ask);
             const convValue = (value * exchange);
-            const number = 10000;
 
             return (
-              <tr key={ (Math.floor(Math.random() * number) + 1) }>
+              <tr key={ expense.id }>
                 <td>{expense.description}</td>
                 <td>{expense.tag}</td>
                 <td>{expense.method}</td>
@@ -48,7 +52,13 @@ class Table extends Component {
                 <td>{convValue.toFixed(2)}</td>
                 <td>Real</td>
                 <td>
-                  <button>Editar</button>
+                  <button
+                    type="button"
+                    data-testid="edit-btn"
+                    onClick={ () => this.handleClickEdit(expense.id) }
+                  >
+                    Editar
+                  </button>
                   <button
                     data-testid="delete-btn"
                     type="button"

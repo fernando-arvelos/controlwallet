@@ -1,6 +1,8 @@
 const INITIAL_STATE = {
   currencies: [],
   expenses: [],
+  editor: false,
+  idToEdit: 0,
 };
 
 const wallet = (state = INITIAL_STATE, action) => {
@@ -14,6 +16,19 @@ const wallet = (state = INITIAL_STATE, action) => {
     return {
       ...state,
       expenses: [...state.expenses, action.expenses],
+    };
+  case 'EDIT_EXPENSES':
+    return {
+      ...state,
+      ...state,
+      editor: true,
+      idToEdit: action.payload,
+    };
+  case 'SAVE_EDIT_EXPENSE':
+    return {
+      ...state,
+      expenses: action.payload,
+      editor: false,
     };
   case 'DEL_EXPENSE':
     return {
