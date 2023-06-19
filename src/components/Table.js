@@ -1,11 +1,19 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { string, arrayOf, shape } from 'prop-types';
+import { string, arrayOf, shape, func } from 'prop-types';
+import { delExpenses } from '../redux/actions/ expensesAction';
 
 class Table extends Component {
+  handleClickDel = (expense) => {
+    const { dispatch, expenses } = this.props;
+
+    const idToDelete = expense.id;
+    const newExpenses = expenses.filter((item) => item.id !== idToDelete);
+    dispatch(delExpenses(newExpenses));
+  };
+
   render() {
     const { expenses } = this.props;
-    console.log(expenses);
 
     return (
       <table>
@@ -23,13 +31,15 @@ class Table extends Component {
           </tr>
         </thead>
         <tbody>
-          {expenses.map((expense, index) => {
+          {expenses.map((expense) => {
             const { value, currency, exchangeRates } = expense;
             const exchange = Number(exchangeRates[currency].ask);
             const convValue = (value * exchange);
+            // eslint-disable-next-line no-magic-numbers
+            const randomNumber = (Math.floor(Math.random() * 10000) + 1);
 
             return (
-              <tr key={ index }>
+              <tr key={ randomNumber }>
                 <td>{expense.description}</td>
                 <td>{expense.tag}</td>
                 <td>{expense.method}</td>
@@ -38,7 +48,16 @@ class Table extends Component {
                 <td>{exchange.toFixed(2)}</td>
                 <td>{convValue.toFixed(2)}</td>
                 <td>Real</td>
-                <td>Editar/Excluir</td>
+                <td>
+                  <button>Editar</button>
+                  <button
+                    data-testid="delete-btn"
+                    type="button"
+                    onClick={ () => this.handleClickDel(expense) }
+                  >
+                    Excluir
+                  </button>
+                </td>
               </tr>
             );
           })}
@@ -55,6 +74,7 @@ const mapStateToProps = ({ wallet }) => ({
 export default connect(mapStateToProps)(Table);
 
 Table.propTypes = {
+  dispatch: func.isRequired,
   expenses: arrayOf(shape({
     value: string,
     currency: string,

@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { func, arrayOf, string, shape } from 'prop-types';
+import { func, arrayOf, string } from 'prop-types';
 import { actionFetchCurrencies } from '../redux/actions/walletAction';
 import { addExpenses } from '../redux/actions/ expensesAction';
 import getCurrencies from '../services/currenciesAPI';
 
 class WalletForm extends Component {
   state = {
+    id: 0,
     value: '',
     description: '',
     currency: 'USD',
@@ -27,19 +28,20 @@ class WalletForm extends Component {
   };
 
   handleClick = async (e) => {
-    const { dispatch, expenses } = this.props;
+    const { dispatch } = this.props;
+    const { id } = this.state;
 
     const response = await getCurrencies();
-
     e.preventDefault();
     const stateSaved = {
-      id: expenses.length,
+      id,
       ...this.state,
       exchangeRates: response,
     };
     dispatch(addExpenses(stateSaved));
 
     this.setState({
+      id: id + 1,
       value: '',
       description: '',
       currency: 'USD',
@@ -141,5 +143,4 @@ export default connect(mapStateToProps)(WalletForm);
 WalletForm.propTypes = {
   dispatch: func.isRequired,
   currencies: arrayOf(string).isRequired,
-  expenses: arrayOf(shape()).isRequired,
 };

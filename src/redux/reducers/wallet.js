@@ -15,6 +15,11 @@ const wallet = (state = INITIAL_STATE, action) => {
       ...state,
       expenses: [...state.expenses, action.expenses],
     };
+  case 'DEL_EXPENSE':
+    return {
+      ...state,
+      expenses: action.expenses,
+    };
   default:
     return state;
   }
