@@ -24,15 +24,15 @@ class Table extends Component {
       <table>
         <thead>
           <tr>
-            <th scope="row">Descrição</th>
-            <th scope="row">Tag</th>
-            <th scope="row">Método de pagamento</th>
-            <th scope="row">Valor</th>
-            <th scope="row">Moeda</th>
-            <th scope="row">Câmbio utilizado</th>
-            <th scope="row">Valor convertido</th>
-            <th scope="row">Moeda de conversão</th>
-            <th scope="row">Editar/Excluir</th>
+            <th>Descrição</th>
+            <th>Tag</th>
+            <th>Método de pagamento</th>
+            <th>Valor</th>
+            <th>Moeda</th>
+            <th>Câmbio utilizado</th>
+            <th>Valor convertido</th>
+            <th>Moeda de conversão</th>
+            <th>Editar/Excluir</th>
           </tr>
         </thead>
         <tbody>

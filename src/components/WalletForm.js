@@ -122,19 +122,6 @@ class WalletForm extends Component {
             onChange={ this.handleChange }
           />
 
-          <label htmlFor="method-input">Método de pagamento</label>
-          <select
-            id="method-input"
-            data-testid="method-input"
-            name="method"
-            value={ method }
-            onChange={ this.handleChange }
-          >
-            <option>Dinheiro</option>
-            <option>Cartão de crédito</option>
-            <option>Cartão de débito</option>
-          </select>
-
           <label htmlFor="currency-input">Moeda</label>
           <select
             id="currency-input"
@@ -146,6 +133,19 @@ class WalletForm extends Component {
             {currencies.map((curr, index) => (
               <option key={ index }>{curr}</option>
             ))}
+          </select>
+
+          <label htmlFor="method-input">Método de pagamento</label>
+          <select
+            id="method-input"
+            data-testid="method-input"
+            name="method"
+            value={ method }
+            onChange={ this.handleChange }
+          >
+            <option>Dinheiro</option>
+            <option>Cartão de crédito</option>
+            <option>Cartão de débito</option>
           </select>
 
           <button
