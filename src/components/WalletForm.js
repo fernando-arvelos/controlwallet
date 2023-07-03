@@ -83,8 +83,8 @@ class WalletForm extends Component {
     const { value, description, currency, method, tag } = addExpensesState;
 
     return (
-      <>
-        <div>
+      <main className="flex justify-center">
+        <div className="w-[1037px]">
           <label htmlFor="description-input">Descrição das despesa</label>
           <input
             id="description-input"
@@ -156,7 +156,7 @@ class WalletForm extends Component {
           </button>
         </div>
 
-      </>
+      </main>
     );
   }
 }

@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { string, arrayOf, shape } from 'prop-types';
+import { IoPersonCircle } from 'react-icons/io5';
+import logo from '../img/logo.png';
+import coins from '../img/coins.svg';
+import Table from './Table';
 
 class Header extends Component {
   render() {
@@ -18,19 +22,27 @@ class Header extends Component {
     const totalValue = reducerValue.toFixed(2);
 
     return (
-      <>
-        <div>
-          <span>Total de despesas: </span>
-          <span data-testid="total-field">{totalValue}</span>
-          <span data-testid="header-currency-field"> BRL</span>
-        </div>
-        <div
-          data-testid="email-field"
-        >
-          <span>E-mail: </span>
-          <span>{email}</span>
-        </div>
-      </>
+      <main>
+        <header className="flex justify-center font-epilogue">
+          <div className="flex justify-evenly items-center w-[1037px] mt-14 mb-12">
+            <div className="flex items-center">
+              <img className="w-11" src={ logo } alt="logo" />
+              <span className="text-[25px] mr-2 text-[#003BE5]">Control</span>
+              <span className="text-[25px] text-[#2FC18C] font-extrabold">Wallet</span>
+            </div>
+            <div className="flex items-center text-[#003BE5] text-sm">
+              <img className="mr-2 w-7" src={ coins } alt="coin" />
+              <span className="font-bold mr-1">Total de despesas:</span>
+              <span>{totalValue}</span>
+              <span className="ml-1">BRL</span>
+            </div>
+            <div className="flex items-center">
+              <IoPersonCircle className="text-[#2FC18C] text-2xl" />
+              <span className="ml-2 text-sm font-semibold text-[#2FC18C]">{email}</span>
+            </div>
+          </div>
+        </header>
+      </main>
     );
   }
 }
