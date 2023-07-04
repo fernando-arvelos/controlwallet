@@ -4,7 +4,6 @@ import { string, arrayOf, shape } from 'prop-types';
 import { IoPersonCircle } from 'react-icons/io5';
 import logo from '../img/logo.png';
 import coins from '../img/coins.svg';
-import Table from './Table';
 
 class Header extends Component {
   render() {
@@ -23,14 +22,14 @@ class Header extends Component {
 
     return (
       <main>
-        <header className="flex justify-center font-epilogue">
-          <div className="flex justify-evenly items-center w-[1037px] mt-14 mb-12">
-            <div className="flex items-center">
-              <img className="w-11" src={ logo } alt="logo" />
+        <header className="flex justify-center">
+          <div className="global-header">
+            <div className="logo-header">
+              <img className="w-11 mb-3 lg:m-0" src={ logo } alt="logo" />
               <span className="text-[25px] mr-2 text-[#003BE5]">Control</span>
               <span className="text-[25px] text-[#2FC18C] font-extrabold">Wallet</span>
             </div>
-            <div className="flex items-center text-[#003BE5] text-sm">
+            <div className="flex items-center text-[#003BE5] text-sm mb-3 lg:m-0">
               <img className="mr-2 w-7" src={ coins } alt="coin" />
               <span className="font-bold mr-1">Total de despesas:</span>
               <span>{totalValue}</span>
@@ -38,7 +37,7 @@ class Header extends Component {
             </div>
             <div className="flex items-center">
               <IoPersonCircle className="text-[#2FC18C] text-2xl" />
-              <span className="ml-2 text-sm font-semibold text-[#2FC18C]">{email}</span>
+              <span className="ml-2 text-sm font-semibold text-[#2FC18C]">email@email.com</span>
             </div>
           </div>
         </header>

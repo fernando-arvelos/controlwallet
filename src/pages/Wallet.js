@@ -7,7 +7,7 @@ class Wallet extends React.Component {
   render() {
     return (
       <main className="bg-img flex flex-col items-center">
-        <div className="header-walletform">
+        <div className="header-wallet">
           <Header />
           <WalletForm />
         </div>

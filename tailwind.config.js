@@ -7,5 +7,10 @@ export const theme = {
   fontFamily: {
     epilogue: ['Epilogue', 'sans-serif'],
   },
+  screens: {
+    sm: '394px',
+    md: '768px',
+    lg: '1024px',
+  },
 };
 export const plugins = [];

@@ -2,10 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+  font-family: 'Epilogue', sans-serif;
+}
 
 @layer components {
   .bg-img {
-    @apply bg-cover bg-center h-screen bg-[url('./img/fundo.png')] bg-[#2FC18C];
+    @apply bg-cover bg-center min-h-screen bg-[url('./img/fundo.png')] bg-[#2FC18C];
   }
 
   /* Página login */
@@ -21,8 +24,52 @@
     @apply flex-shrink-0 bg-[#003BE5] w-[250px] h-[40px] md:w-[330px] rounded-md border border-[#003BE5] mb-[10px] text-white font-bold text-[14px] placeholder:text-[#003BE5] pl-2 focus:outline-none disabled:bg-gray-400 disabled:border-none disabled:cursor-not-allowed;
   }
 
+  /* Componente Header  */
+  .global-header {
+    @apply flex flex-col lg:flex-row justify-evenly items-center lg:w-[1000px] my-5 lg:mt-0
+  }
+
+  .logo-header {
+    @apply flex items-center
+  }
+
   /* Página Wallet */
-  .header-walletform {
-    @apply w-[1037px] h-[482px] shadow-[-4px_9px_13px_0_rgba(5,18,54,0.40)] bg-white rounded-b-xl z-[1];
+  .header-wallet {
+    @apply flex flex-col lg:justify-evenly w-[330px] sm:w-[370px] md:w-[650px] lg:w-[1037px] h-[385px] shadow-[-4px_9px_13px_0_rgba(5,18,54,0.40)] bg-white rounded-b-xl z-[1];
+  }
+
+/* Componente WalletForm */
+  .global-walletform {
+    @apply flex flex-col lg:flex-row lg:justify-center items-center mb-2 lg:mb-7
+  }
+
+  .select-walletform {
+    @apply h-[25px] lg:h-[30px] rounded-md border-[1px] text-sm text-[#003BE5] border-[#003BE5] focus:outline-none mb-2 lg:mb-0
+  }
+
+  .input-walletform {
+    @apply h-[25px] lg:h-[30px] rounded-md border-[1px] border-[#003BE5] focus:outline-none text-[#003BE5] pl-2 mb-2 lg:mb-0
+  }
+
+  .button-walletform{
+    @apply w-[250px] sm:w-[330px] h-[40px] rounded-md bg-[#2FC18C] text-white text-center text-sm font-bold focus:outline-none hover:bg-[#1cb97f]
+  }
+
+/* Componente Table */
+
+  .main-table {
+    @apply flex justify-center rounded-lg mt-[-240px] mb-8 bg-[#003BE5] w-[350px] sm:w-[390px] md:w-[750px] lg:w-[1155px] min-h-[400px] shadow-[-4px_9px_13px_0_rgba(3,107,82,0.30)];
+  }
+
+  .table-table {
+    @apply mt-[269px];
+  }
+
+  .th-table {
+    @apply text-white text-xs font-bold text-center w-[115px] py-2  
+  }
+
+  .td-table {
+    @apply text-[#2FC18C] text-xs font-medium text-center w-[115px] py-3 border-b-[1px] border-[#2FC18C]
   }
 }
