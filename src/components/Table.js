@@ -26,7 +26,7 @@ class Table extends Component {
     return (
       <main className="main-table">
         <div className="overflow-x-auto">
-          <table className="table-table min-w-full">
+          <table className="table-table min-w-full mx-2 md:mx-0">
             <thead className="w-[1037px] border-b-[1px]">
               <tr className="divide-x">
                 <th className="th-table">Descrição</th>

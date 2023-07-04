@@ -37,7 +37,7 @@ class Header extends Component {
             </div>
             <div className="flex items-center">
               <IoPersonCircle className="text-[#2FC18C] text-2xl" />
-              <span className="ml-2 text-sm font-semibold text-[#2FC18C]">email@email.com</span>
+              <span className="ml-2 text-sm font-semibold text-[#2FC18C]">{email}</span>
             </div>
           </div>
         </header>

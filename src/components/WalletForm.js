@@ -76,6 +76,17 @@ class WalletForm extends Component {
     dispatch(saveEditExpense(deleteExpense));
     const newExpenses = [...deleteExpense, editedCurrent];
     dispatch(saveEditExpense(newExpenses.sort((a, b) => a.id - b.id)));
+    this.setState((prev) => ({
+      ...prev,
+      addExpensesState: {
+        id: prev.addExpensesState.id,
+        value: '',
+        description: '',
+        currency: 'USD',
+        method: 'Dinheiro',
+        tag: 'Alimentação',
+      },
+    }));
   };
 
   render() {
