@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/trybeWallet/static/css/main.972a08a7.css",
-    "main.js": "/trybeWallet/static/js/main.79f67d99.js",
-    "static/media/fundo.png": "/trybeWallet/static/media/fundo.cc3961e5662bef700090.png",
-    "static/media/logo.png": "/trybeWallet/static/media/logo.0fe2b3227f6680497e92.png",
-    "static/media/coins.svg": "/trybeWallet/static/media/coins.e98495bd68f10765eb637c22fe0c1c14.svg",
-    "index.html": "/trybeWallet/index.html",
-    "main.972a08a7.css.map": "/trybeWallet/static/css/main.972a08a7.css.map",
-    "main.79f67d99.js.map": "/trybeWallet/static/js/main.79f67d99.js.map"
+    "main.css": "/controlwallet/static/css/main.5ad89098.css",
+    "main.js": "/controlwallet/static/js/main.94d0962f.js",
+    "static/media/fundo.png": "/controlwallet/static/media/fundo.cc3961e5662bef700090.png",
+    "static/media/logo.png": "/controlwallet/static/media/logo.0fe2b3227f6680497e92.png",
+    "static/media/coins.svg": "/controlwallet/static/media/coins.e98495bd68f10765eb637c22fe0c1c14.svg",
+    "index.html": "/controlwallet/index.html",
+    "main.5ad89098.css.map": "/controlwallet/static/css/main.5ad89098.css.map",
+    "main.94d0962f.js.map": "/controlwallet/static/js/main.94d0962f.js.map"
   },
   "entrypoints": [
-    "static/css/main.972a08a7.css",
-    "static/js/main.79f67d99.js"
+    "static/css/main.5ad89098.css",
+    "static/js/main.94d0962f.js"
   ]
 }
